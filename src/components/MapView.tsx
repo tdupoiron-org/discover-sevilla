@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
@@ -23,6 +22,12 @@ const DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon
 
+// Theme colors for markers (matching the design system)
+const MARKER_COLORS = {
+  visited: 'oklch(0.62 0.15 35)', // Terracotta - matches primary color
+  unvisited: 'oklch(0.75 0.18 60)', // Amber - matches accent color
+} as const
+
 interface MapViewProps {
   sites: Site[]
   visitedSites: string[]
@@ -35,9 +40,10 @@ export function MapView({ sites, visitedSites, onToggleVisit }: MapViewProps) {
 
   // Create custom icons for visited and unvisited sites
   const createCustomIcon = (isVisited: boolean) => {
+    const color = isVisited ? MARKER_COLORS.visited : MARKER_COLORS.unvisited
     const iconHtml = `
       <div style="
-        background-color: ${isVisited ? '#C2773A' : '#E8A35D'};
+        background-color: ${color};
         width: 30px;
         height: 30px;
         border-radius: 50% 50% 50% 0;

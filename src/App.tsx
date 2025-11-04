@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import { sevillaSites } from '@/data/sites'
 import { SiteCard } from '@/components/SiteCard'
+import { FilterBar, QuickFilter } from '@/components/FilterBar'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { MapPin, CheckCircle } from '@phosphor-icons/react'
+import { Site } from '@/types/site'
 
 function App() {
   const [visitedSites, setVisitedSites] = useState<string[]>([])
   const [filter, setFilter] = useState<'all' | 'visited' | 'unvisited'>('all')
+  const [quickFilters, setQuickFilters] = useState<QuickFilter[]>([])
 
   const visited = visitedSites
 
@@ -20,10 +23,50 @@ function App() {
     })
   }
 
+  const toggleQuickFilter = (quickFilter: QuickFilter) => {
+    setQuickFilters((current) => {
+      if (current.includes(quickFilter)) {
+        return current.filter(f => f !== quickFilter)
+      }
+      return [...current, quickFilter]
+    })
+  }
+
+  const matchesQuickFilters = (site: Site): boolean => {
+    if (quickFilters.length === 0) return true
+
+    return quickFilters.every(filter => {
+      switch (filter) {
+        case 'quick-visit':
+          // Less than 1 hour: "30-45 min", "45 min - 1 hour"
+          return site.duration.includes('min') || site.duration === '1 hour'
+        
+        case 'short-visit':
+          // Less than 2 hours: includes above plus "1-1.5 hours", "1.5-2 hours"
+          return !site.duration.includes('2-3')
+        
+        case 'less-crowded':
+          return site.crowdLevel === 'low'
+        
+        case 'must-see':
+          return site.popularity === 'must-see'
+        
+        case 'hidden-gems':
+          return site.popularity === 'hidden-gem'
+        
+        default:
+          return true
+      }
+    })
+  }
+
   const filteredSites = sevillaSites.filter(site => {
-    if (filter === 'visited') return visited.includes(site.id)
-    if (filter === 'unvisited') return !visited.includes(site.id)
-    return true
+    // Apply visited/unvisited filter
+    if (filter === 'visited' && !visited.includes(site.id)) return false
+    if (filter === 'unvisited' && visited.includes(site.id)) return false
+    
+    // Apply quick filters
+    return matchesQuickFilters(site)
   })
 
   const visitedCount = visited.length
@@ -91,6 +134,11 @@ function App() {
                 <Progress value={progressPercentage} className="h-2" />
               </div>
             )}
+
+            <FilterBar 
+              activeFilters={quickFilters}
+              onToggleFilter={toggleQuickFilter}
+            />
           </div>
         </header>
 

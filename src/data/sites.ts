@@ -10,7 +10,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'high',
     rating: 4.9,
     popularity: 'must-see',
-    category: 'Palace'
+    category: 'Palace',
+    coordinates: { lat: 37.3838, lng: -5.9931 }
   },
   {
     id: 'seville-cathedral',
@@ -21,7 +22,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'high',
     rating: 4.8,
     popularity: 'must-see',
-    category: 'Cathedral'
+    category: 'Cathedral',
+    coordinates: { lat: 37.3859, lng: -5.9931 }
   },
   {
     id: 'plaza-espana',
@@ -32,7 +34,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'medium',
     rating: 4.9,
     popularity: 'must-see',
-    category: 'Plaza'
+    category: 'Plaza',
+    coordinates: { lat: 37.3771, lng: -5.9868 }
   },
   {
     id: 'barrio-santa-cruz',
@@ -43,7 +46,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'medium',
     rating: 4.7,
     popularity: 'must-see',
-    category: 'Neighborhood'
+    category: 'Neighborhood',
+    coordinates: { lat: 37.3845, lng: -5.9887 }
   },
   {
     id: 'metropol-parasol',
@@ -54,7 +58,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'low',
     rating: 4.4,
     popularity: 'popular',
-    category: 'Architecture'
+    category: 'Architecture',
+    coordinates: { lat: 37.3933, lng: -5.9920 }
   },
   {
     id: 'flamenco-triana',
@@ -65,7 +70,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'medium',
     rating: 4.8,
     popularity: 'must-see',
-    category: 'Experience'
+    category: 'Experience',
+    coordinates: { lat: 37.3845, lng: -6.0037 }
   },
   {
     id: 'maria-luisa-park',
@@ -76,7 +82,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'low',
     rating: 4.6,
     popularity: 'popular',
-    category: 'Park'
+    category: 'Park',
+    coordinates: { lat: 37.3760, lng: -5.9874 }
   },
   {
     id: 'torre-del-oro',
@@ -87,7 +94,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'low',
     rating: 4.3,
     popularity: 'popular',
-    category: 'Monument'
+    category: 'Monument',
+    coordinates: { lat: 37.3824, lng: -5.9962 }
   },
   {
     id: 'triana-market',
@@ -98,7 +106,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'medium',
     rating: 4.5,
     popularity: 'hidden-gem',
-    category: 'Market'
+    category: 'Market',
+    coordinates: { lat: 37.3864, lng: -6.0042 }
   },
   {
     id: 'casa-de-pilatos',
@@ -109,7 +118,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'low',
     rating: 4.6,
     popularity: 'hidden-gem',
-    category: 'Palace'
+    category: 'Palace',
+    coordinates: { lat: 37.3911, lng: -5.9871 }
   },
   {
     id: 'archivo-indias',
@@ -120,7 +130,8 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'low',
     rating: 4.4,
     popularity: 'hidden-gem',
-    category: 'Museum'
+    category: 'Museum',
+    coordinates: { lat: 37.3845, lng: -5.9933 }
   },
   {
     id: 'guadalquivir-cruise',
@@ -131,6 +142,7 @@ export const sevillaSites: Site[] = [
     crowdLevel: 'low',
     rating: 4.5,
     popularity: 'popular',
-    category: 'Experience'
+    category: 'Experience',
+    coordinates: { lat: 37.3839, lng: -5.9963 }
   }
 ]

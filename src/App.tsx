@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { sevillaSites } from '@/data/sites'
 import { SiteCard } from '@/components/SiteCard'
+import { MapView } from '@/components/MapView'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
-import { MapPin, CheckCircle } from '@phosphor-icons/react'
+import { MapPin, CheckCircle, SquaresFour, MapTrifold } from '@phosphor-icons/react'
 
 function App() {
   const [visitedSites, setVisitedSites] = useState<string[]>([])
   const [filter, setFilter] = useState<'all' | 'visited' | 'unvisited'>('all')
+  const [view, setView] = useState<'grid' | 'map'>('grid')
 
   const visited = visitedSites
 
@@ -78,6 +80,31 @@ function App() {
                 <CheckCircle weight="fill" className="inline w-4 h-4 mr-1.5" />
                 Visited ({visitedCount})
               </button>
+              
+              <div className="ml-auto flex gap-2">
+                <button
+                  onClick={() => setView('grid')}
+                  className={`p-2 rounded-lg transition-colors ${
+                    view === 'grid'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                  }`}
+                  aria-label="Grid view"
+                >
+                  <SquaresFour weight="fill" className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setView('map')}
+                  className={`p-2 rounded-lg transition-colors ${
+                    view === 'map'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                  }`}
+                  aria-label="Map view"
+                >
+                  <MapTrifold weight="fill" className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {visitedCount > 0 && (
@@ -104,6 +131,12 @@ function App() {
                 : 'No sites match your filter.'}
             </p>
           </div>
+        ) : view === 'map' ? (
+          <MapView 
+            sites={filteredSites} 
+            visitedSites={visited}
+            onToggleVisit={toggleVisit}
+          />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredSites.map((site) => (

@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Slider } from '@/components/ui/slider'
 import { MapPin, CheckCircle, NavigationArrow, X } from '@phosphor-icons/react'
 import { useGeolocation } from '@/hooks/use-geolocation'
-import { calculateDistance, calculateWalkingTime } from '@/lib/geolocation'
+import { calculateDistance, calculateWalkingTime, formatWalkingTime } from '@/lib/geolocation'
 
 function App() {
   const [visitedSites, setVisitedSites] = useState<string[]>([])
@@ -136,7 +136,7 @@ function App() {
                     {showDurationFilter && (
                       <div className="mt-4 pt-4 border-t border-border">
                         <label className="text-sm font-medium text-foreground mb-3 block">
-                          Show sites within walking time: {maxWalkingTime < 60 ? `${maxWalkingTime} min` : `${Math.floor(maxWalkingTime / 60)} hr ${maxWalkingTime % 60 > 0 ? `${maxWalkingTime % 60} min` : ''}`}
+                          Show sites within walking time: {formatWalkingTime(maxWalkingTime)}
                         </label>
                         <Slider
                           value={[maxWalkingTime]}

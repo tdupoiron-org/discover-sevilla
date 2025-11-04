@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Clock, Users, Star, Fire, Sparkle, CheckCircle, NavigationArrow } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
+import { formatWalkingTime } from '@/lib/geolocation'
 
 interface SiteCardProps {
   site: Site
@@ -115,13 +116,7 @@ export function SiteCard({ site, isVisited, onToggleVisit, walkingTime }: SiteCa
           {walkingTime !== undefined && walkingTime !== null && (
             <div className="flex items-center gap-1.5 text-primary font-medium">
               <NavigationArrow weight="bold" className="w-4 h-4" />
-              <span>
-                {walkingTime < 1 
-                  ? '< 1 min' 
-                  : walkingTime < 60 
-                    ? `${walkingTime} min` 
-                    : `${Math.floor(walkingTime / 60)} hr ${walkingTime % 60 > 0 ? `${walkingTime % 60} min` : ''}`}
-              </span>
+              <span>{formatWalkingTime(walkingTime)}</span>
             </div>
           )}
         </div>

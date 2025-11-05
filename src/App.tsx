@@ -127,6 +127,7 @@ function App() {
               href="https://github.com/tdupoiron" 
               target="_blank" 
               rel="noopener noreferrer"
+              aria-label="Visit tdupoiron's GitHub profile"
               className="font-medium text-foreground hover:text-primary transition-colors underline"
             >
               tdupoiron

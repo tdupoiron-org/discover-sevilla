@@ -122,8 +122,16 @@ function App() {
       <footer className="border-t border-border mt-12">
         <div className="max-w-7xl mx-auto px-6 py-6 md:px-8">
           <p className="text-center text-sm text-muted-foreground">
-            © 2025 Discover Sevilla. Made with ❤️ for travelers.
-            {/* Hecho con amor para viajeros */}
+            © 2025 Discover Sevilla. Made with ❤️ for travelers by{' '}
+            <a 
+              href="https://github.com/tdupoiron" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-medium text-foreground hover:text-primary transition-colors underline"
+            >
+              tdupoiron
+            </a>
+            {/* Hecho con amor para viajeros por tdupoiron */}
           </p>
         </div>
       </footer>

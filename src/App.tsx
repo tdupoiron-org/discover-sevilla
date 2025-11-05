@@ -4,10 +4,13 @@ import { SiteCard } from '@/components/SiteCard'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { MapPin, CheckCircle } from '@phosphor-icons/react'
+import { OnboardingDialog } from '@/components/OnboardingDialog'
+import { useFirstVisit } from '@/hooks/useFirstVisit'
 
 function App() {
   const [visitedSites, setVisitedSites] = useState<string[]>([])
   const [filter, setFilter] = useState<'all' | 'visited' | 'unvisited'>('all')
+  const { isFirstVisit, isLoading, markAsVisited } = useFirstVisit()
 
   const visited = visitedSites
 
@@ -30,8 +33,18 @@ function App() {
   const totalCount = sevillaSites.length
   const progressPercentage = (visitedCount / totalCount) * 100
 
+  // Don't render the main app until we've checked first visit status
+  if (isLoading) {
+    return null
+  }
+
   return (
     <div className="min-h-screen bg-background">
+      <OnboardingDialog 
+        open={isFirstVisit} 
+        onComplete={markAsVisited}
+      />
+      
       <div className="max-w-7xl mx-auto px-6 py-8 md:px-8 md:py-12">
         <header className="mb-8 md:mb-12">
           <div className="flex items-center gap-3 mb-3">

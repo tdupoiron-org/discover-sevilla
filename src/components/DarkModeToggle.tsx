@@ -13,7 +13,7 @@ export function DarkModeToggle() {
 
   if (!mounted) {
     return (
-      <div className="w-10 h-10" />
+      <div className="w-10 h-10" aria-hidden="true" role="presentation" />
     )
   }
 

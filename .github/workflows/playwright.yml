@@ -36,7 +36,6 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test --project=${{ matrix.project }}
-        continue-on-error: true
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
@@ -148,11 +147,9 @@ jobs:
 
       - name: Run Mobile Chrome tests
         run: npx playwright test --project="Mobile Chrome"
-        continue-on-error: true
 
       - name: Run Mobile Safari tests
         run: npx playwright test --project="Mobile Safari"
-        continue-on-error: true
 
       - name: Upload mobile test results
         uses: actions/upload-artifact@v4

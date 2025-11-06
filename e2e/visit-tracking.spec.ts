@@ -86,7 +86,9 @@ test.describe('Visit Tracking', () => {
     
     // Get initial counts
     const visitedButtonBefore = await page.getByRole('button', { name: /Visited/i }).textContent();
-    const visitedCountBefore = parseInt(visitedButtonBefore!.match(/\((\d+)\)/)![1]);
+    const matchBefore = visitedButtonBefore?.match(/\((\d+)\)/);
+    expect(matchBefore).toBeTruthy();
+    const visitedCountBefore = parseInt(matchBefore![1]);
     
     // Mark a site
     const firstCheckbox = page.locator('[type="button"]').filter({ has: page.locator('[role="checkbox"]') }).first();
@@ -94,7 +96,9 @@ test.describe('Visit Tracking', () => {
     
     // Verify visited count increased
     const visitedButtonAfter = await page.getByRole('button', { name: /Visited/i }).textContent();
-    const visitedCountAfter = parseInt(visitedButtonAfter!.match(/\((\d+)\)/)![1]);
+    const matchAfter = visitedButtonAfter?.match(/\((\d+)\)/);
+    expect(matchAfter).toBeTruthy();
+    const visitedCountAfter = parseInt(matchAfter![1]);
     
     expect(visitedCountAfter).toBe(visitedCountBefore + 1);
   });

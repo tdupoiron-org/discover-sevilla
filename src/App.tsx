@@ -20,11 +20,17 @@ function App() {
     })
   }
 
-  const filteredSites = sevillaSites.filter(site => {
-    if (filter === 'visited') return visited.includes(site.id)
-    if (filter === 'unvisited') return !visited.includes(site.id)
-    return true
-  })
+  // Sort sites by popularity: must-see first, then popular, then hidden-gem
+  // Ordenar sitios por popularidad: imprescindibles primero, luego populares, luego joyas ocultas
+  const popularityOrder = { 'must-see': 1, 'popular': 2, 'hidden-gem': 3 }
+  
+  const filteredSites = sevillaSites
+    .filter(site => {
+      if (filter === 'visited') return visited.includes(site.id)
+      if (filter === 'unvisited') return !visited.includes(site.id)
+      return true
+    })
+    .sort((a, b) => popularityOrder[a.popularity] - popularityOrder[b.popularity])
 
   const visitedCount = visited.length
   const totalCount = sevillaSites.length

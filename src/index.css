@@ -16,33 +16,37 @@
 }
 
 :root {
-  --background: oklch(0.96 0.02 85);
-  --foreground: oklch(0.25 0.01 35);
+  /* AXA Blue and White Theme */
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.20 0.02 250);
 
-  --card: oklch(0.99 0 0);
-  --card-foreground: oklch(0.25 0.01 35);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.02 250);
 
-  --popover: oklch(0.99 0 0);
-  --popover-foreground: oklch(0.25 0.01 35);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.02 250);
 
-  --primary: oklch(0.62 0.15 35);
-  --primary-foreground: oklch(0.99 0 0);
+  /* AXA Primary Blue: #00008F (deep blue) */
+  --primary: oklch(0.35 0.15 275);
+  --primary-foreground: oklch(1 0 0);
 
-  --secondary: oklch(0.90 0.05 35);
-  --secondary-foreground: oklch(0.25 0.01 35);
+  /* AXA Light Blue for secondary elements */
+  --secondary: oklch(0.90 0.04 250);
+  --secondary-foreground: oklch(0.20 0.02 250);
 
-  --muted: oklch(0.92 0.02 85);
-  --muted-foreground: oklch(0.50 0.01 35);
+  --muted: oklch(0.94 0.01 250);
+  --muted-foreground: oklch(0.48 0.02 250);
 
-  --accent: oklch(0.75 0.18 60);
-  --accent-foreground: oklch(0.15 0 0);
+  /* AXA Accent Blue (lighter, more vibrant) */
+  --accent: oklch(0.55 0.18 250);
+  --accent-foreground: oklch(1 0 0);
 
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.99 0 0);
+  --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.88 0.02 85);
-  --input: oklch(0.88 0.02 85);
-  --ring: oklch(0.62 0.15 35);
+  --border: oklch(0.88 0.01 250);
+  --input: oklch(0.92 0.01 250);
+  --ring: oklch(0.55 0.18 250);
 
   --radius: 0.75rem;
 }

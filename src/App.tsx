@@ -1,13 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { sevillaSites } from '@/data/sites'
 import { SiteCard } from '@/components/SiteCard'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
-import { MapPin, CheckCircle } from '@phosphor-icons/react'
+import { MapPin, CheckCircle, Star } from '@phosphor-icons/react'
+import { UserSiteData } from '@/types/site'
 
 function App() {
-  const [visitedSites, setVisitedSites] = useState<string[]>([])
-  const [filter, setFilter] = useState<'all' | 'visited' | 'unvisited'>('all')
+  // Load user data from localStorage / Cargar datos del usuario desde localStorage
+  const [visitedSites, setVisitedSites] = useState<string[]>(() => {
+    const saved = localStorage.getItem('visitedSites')
+    return saved ? JSON.parse(saved) : []
+  })
+  
+  const [userSiteData, setUserSiteData] = useState<Record<string, UserSiteData>>(() => {
+    const saved = localStorage.getItem('userSiteData')
+    return saved ? JSON.parse(saved) : {}
+  })
+  
+  const [filter, setFilter] = useState<'all' | 'visited' | 'unvisited' | 'priority'>('all')
+
+  // Persist to localStorage / Persistir en localStorage
+  useEffect(() => {
+    localStorage.setItem('visitedSites', JSON.stringify(visitedSites))
+  }, [visitedSites])
+
+  useEffect(() => {
+    localStorage.setItem('userSiteData', JSON.stringify(userSiteData))
+  }, [userSiteData])
 
   const visited = visitedSites
 
@@ -20,14 +40,38 @@ function App() {
     })
   }
 
+  const togglePriority = (siteId: string) => {
+    setUserSiteData((current) => ({
+      ...current,
+      [siteId]: {
+        ...current[siteId],
+        isPriority: !current[siteId]?.isPriority,
+        userRating: current[siteId]?.userRating ?? null
+      }
+    }))
+  }
+
+  const setUserRating = (siteId: string, rating: number | null) => {
+    setUserSiteData((current) => ({
+      ...current,
+      [siteId]: {
+        ...current[siteId],
+        isPriority: current[siteId]?.isPriority ?? false,
+        userRating: rating
+      }
+    }))
+  }
+
   const filteredSites = sevillaSites.filter(site => {
     if (filter === 'visited') return visited.includes(site.id)
     if (filter === 'unvisited') return !visited.includes(site.id)
+    if (filter === 'priority') return userSiteData[site.id]?.isPriority
     return true
   })
 
   const visitedCount = visited.length
   const totalCount = sevillaSites.length
+  const priorityCount = Object.values(userSiteData).filter(data => data.isPriority).length
   const progressPercentage = (visitedCount / totalCount) * 100
 
   return (
@@ -56,6 +100,17 @@ function App() {
                 }`}
               >
                 All Sites ({totalCount})
+              </button>
+              <button
+                onClick={() => setFilter('priority')}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  filter === 'priority'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                }`}
+              >
+                <Star weight="fill" className="inline w-4 h-4 mr-1.5" />
+                Priority ({priorityCount})
               </button>
               <button
                 onClick={() => setFilter('unvisited')}
@@ -111,7 +166,11 @@ function App() {
                 key={site.id}
                 site={site}
                 isVisited={visited.includes(site.id)}
+                isPriority={userSiteData[site.id]?.isPriority ?? false}
+                userRating={userSiteData[site.id]?.userRating ?? null}
                 onToggleVisit={toggleVisit}
+                onTogglePriority={togglePriority}
+                onSetUserRating={setUserRating}
               />
             ))}
           </div>

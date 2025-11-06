@@ -2,16 +2,22 @@ import { Site } from '@/types/site'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Clock, Users, Star, Fire, Sparkle, CheckCircle } from '@phosphor-icons/react'
+import { Clock, Users, Star, Fire, Sparkle, CheckCircle, BookmarkSimple } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
+import { useState } from 'react'
 
 interface SiteCardProps {
   site: Site
   isVisited: boolean
+  isPriority: boolean
+  userRating: number | null
   onToggleVisit: (siteId: string) => void
+  onTogglePriority: (siteId: string) => void
+  onSetUserRating: (siteId: string, rating: number | null) => void
 }
 
-export function SiteCard({ site, isVisited, onToggleVisit }: SiteCardProps) {
+export function SiteCard({ site, isVisited, isPriority, userRating, onToggleVisit, onTogglePriority, onSetUserRating }: SiteCardProps) {
+  const [showRatingInput, setShowRatingInput] = useState(false)
   const getCrowdBadgeVariant = (level: Site['crowdLevel']) => {
     switch (level) {
       case 'high':
@@ -41,7 +47,8 @@ export function SiteCard({ site, isVisited, onToggleVisit }: SiteCardProps) {
     <Card 
       className={cn(
         "group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
-        isVisited && "opacity-60"
+        isVisited && "opacity-60",
+        isPriority && "ring-2 ring-accent"
       )}
     >
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -67,16 +74,43 @@ export function SiteCard({ site, isVisited, onToggleVisit }: SiteCardProps) {
           </Badge>
         </div>
 
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3 right-3 flex gap-2">
+          {/* Priority button / Botón de prioridad */}
+          <button
+            onClick={() => onTogglePriority(site.id)}
+            className={cn(
+              "p-2 rounded-full backdrop-blur-sm transition-all",
+              isPriority 
+                ? "bg-accent text-white shadow-lg" 
+                : "bg-white/80 text-muted-foreground hover:bg-accent hover:text-white"
+            )}
+            aria-label={isPriority ? 'Remove from priority' : 'Add to priority'}
+            title={isPriority ? 'Remove from priority' : 'Add to priority'}
+          >
+            <BookmarkSimple weight={isPriority ? "fill" : "regular"} className="w-4 h-4" />
+          </button>
+          
           <Badge className={cn("backdrop-blur-sm", popularityConfig.color)}>
             <PopularityIcon weight="fill" className="w-3 h-3 mr-1" />
             {popularityConfig.label}
           </Badge>
         </div>
 
-        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white">
-          <Star weight="fill" className="w-4 h-4 text-accent" />
-          <span className="font-semibold text-sm">{site.rating}</span>
+        <div className="absolute bottom-3 left-3 flex items-center gap-3">
+          {/* Official rating / Calificación oficial */}
+          <div className="flex items-center gap-1.5 text-white">
+            <Star weight="fill" className="w-4 h-4 text-accent" />
+            <span className="font-semibold text-sm">{site.rating}</span>
+          </div>
+          
+          {/* User rating / Calificación del usuario */}
+          {userRating !== null && (
+            <div className="flex items-center gap-1.5 text-white bg-black/40 backdrop-blur-sm px-2 py-1 rounded-full">
+              <Star weight="fill" className="w-4 h-4 text-blue-400" />
+              <span className="font-semibold text-sm">{userRating}</span>
+              <span className="text-xs opacity-80">You</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -106,10 +140,57 @@ export function SiteCard({ site, isVisited, onToggleVisit }: SiteCardProps) {
           {site.description}
         </p>
 
-        <div className="flex items-center gap-4 pt-2 text-sm text-muted-foreground">
-          <div className="flex items-center gap-1.5">
+        <div className="flex items-center justify-between gap-4 pt-2">
+          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <Clock weight="bold" className="w-4 h-4" />
             <span>{site.duration}</span>
+          </div>
+          
+          {/* User rating section / Sección de calificación del usuario */}
+          <div className="flex items-center gap-1">
+            {showRatingInput ? (
+              <div className="flex items-center gap-1 bg-secondary/50 rounded-full px-2 py-1">
+                {[1, 2, 3, 4, 5].map((rating) => (
+                  <button
+                    key={rating}
+                    onClick={() => {
+                      onSetUserRating(site.id, rating)
+                      setShowRatingInput(false)
+                    }}
+                    className="hover:scale-125 transition-transform"
+                    aria-label={`Rate ${rating} stars`}
+                  >
+                    <Star 
+                      weight={userRating && rating <= userRating ? "fill" : "regular"}
+                      className={cn(
+                        "w-4 h-4",
+                        userRating && rating <= userRating ? "text-blue-500" : "text-muted-foreground"
+                      )}
+                    />
+                  </button>
+                ))}
+                <button
+                  onClick={() => setShowRatingInput(false)}
+                  className="ml-1 text-xs text-muted-foreground hover:text-foreground"
+                  aria-label="Cancel rating"
+                >
+                  ✕
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowRatingInput(true)}
+                className={cn(
+                  "text-xs font-medium px-3 py-1.5 rounded-full transition-colors",
+                  userRating
+                    ? "bg-blue-100 text-blue-700 hover:bg-blue-200"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                )}
+                title={userRating ? "Change your rating" : "Rate this site"}
+              >
+                {userRating ? `Your rating: ${userRating}★` : "Rate"}
+              </button>
+            )}
           </div>
         </div>
       </div>

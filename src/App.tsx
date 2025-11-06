@@ -4,6 +4,15 @@ import { SiteCard } from '@/components/SiteCard'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { MapPin, CheckCircle } from '@phosphor-icons/react'
+import type { Site } from '@/types/site'
+
+// Sort sites by popularity: must-see first, then popular, then hidden-gem
+// Ordenar sitios por popularidad: imprescindibles primero, luego populares, luego joyas ocultas
+const POPULARITY_ORDER: Record<Site['popularity'], number> = {
+  'must-see': 1,
+  'popular': 2,
+  'hidden-gem': 3
+}
 
 function App() {
   const [visitedSites, setVisitedSites] = useState<string[]>([])
@@ -19,12 +28,14 @@ function App() {
       return [...current, siteId]
     })
   }
-
-  const filteredSites = sevillaSites.filter(site => {
-    if (filter === 'visited') return visited.includes(site.id)
-    if (filter === 'unvisited') return !visited.includes(site.id)
-    return true
-  })
+  
+  const filteredSites = sevillaSites
+    .filter(site => {
+      if (filter === 'visited') return visited.includes(site.id)
+      if (filter === 'unvisited') return !visited.includes(site.id)
+      return true
+    })
+    .sort((a, b) => POPULARITY_ORDER[a.popularity] - POPULARITY_ORDER[b.popularity])
 
   const visitedCount = visited.length
   const totalCount = sevillaSites.length

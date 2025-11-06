@@ -22,12 +22,8 @@ export function DarkModeToggle() {
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       className="relative flex items-center justify-center w-10 h-10 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-      aria-live="polite"
       title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
-      <span className="sr-only">
-        {theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-      </span>
       {theme === 'dark' ? (
         <Sun weight="fill" className="w-5 h-5 transition-transform duration-200 hover:scale-110" aria-hidden="true" />
       ) : (

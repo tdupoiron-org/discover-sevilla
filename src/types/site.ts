@@ -8,4 +8,6 @@ export interface Site {
   rating: number
   popularity: 'must-see' | 'popular' | 'hidden-gem'
   category: string
+  latitude: number
+  longitude: number
 }

@@ -1,15 +1,40 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { sevillaSites } from '@/data/sites'
 import { SiteCard } from '@/components/SiteCard'
+import { MapView } from '@/components/MapView'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
-import { MapPin, CheckCircle } from '@phosphor-icons/react'
+import { MapPin, CheckCircle, SquaresFour, MapTrifold } from '@phosphor-icons/react'
+
+type ViewMode = 'grid' | 'map'
 
 function App() {
   const [visitedSites, setVisitedSites] = useState<string[]>([])
   const [filter, setFilter] = useState<'all' | 'visited' | 'unvisited'>('all')
+  const [viewMode, setViewMode] = useState<ViewMode>('grid')
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | undefined>()
 
   const visited = visitedSites
+
+  // Request user's geolocation on mount
+  // Solicitar la geolocalización del usuario al montar
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          })
+        },
+        (error) => {
+          console.log('Geolocation error:', error.message)
+          // Silently fail - geolocation is optional
+          // Fallar silenciosamente - la geolocalización es opcional
+        }
+      )
+    }
+  }, [])
 
   const toggleVisit = (siteId: string) => {
     setVisitedSites((current) => {
@@ -78,6 +103,34 @@ function App() {
                 <CheckCircle weight="fill" className="inline w-4 h-4 mr-1.5" />
                 Visited ({visitedCount})
               </button>
+
+              {/* View Toggle Buttons - Botones de cambio de vista */}
+              <div className="ml-auto flex gap-2 border border-border rounded-full p-1">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors flex items-center gap-2 ${
+                    viewMode === 'grid'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-foreground hover:bg-secondary'
+                  }`}
+                  aria-label="Grid view"
+                >
+                  <SquaresFour weight="fill" className="w-4 h-4" />
+                  Grid
+                </button>
+                <button
+                  onClick={() => setViewMode('map')}
+                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors flex items-center gap-2 ${
+                    viewMode === 'map'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-foreground hover:bg-secondary'
+                  }`}
+                  aria-label="Map view"
+                >
+                  <MapTrifold weight="fill" className="w-4 h-4" />
+                  Map
+                </button>
+              </div>
             </div>
 
             {visitedCount > 0 && (
@@ -94,27 +147,40 @@ function App() {
           </div>
         </header>
 
-        {filteredSites.length === 0 ? (
-          <div className="text-center py-16">
-            <p className="text-lg text-muted-foreground">
-              {filter === 'visited' && visitedCount === 0
-                ? 'Start exploring Sevilla and mark your first site! ✨'
-                : filter === 'visited' && visitedCount === totalCount
-                ? '🎉 Congratulations! You\'ve visited all the sites!'
-                : 'No sites match your filter.'}
-            </p>
-          </div>
+        {/* Map View - Vista de mapa */}
+        {viewMode === 'map' ? (
+          <MapView 
+            sites={filteredSites}
+            visitedSites={visited}
+            onToggleVisit={toggleVisit}
+            userLocation={userLocation}
+          />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredSites.map((site) => (
-              <SiteCard
-                key={site.id}
-                site={site}
-                isVisited={visited.includes(site.id)}
-                onToggleVisit={toggleVisit}
-              />
-            ))}
-          </div>
+          /* Grid View - Vista de cuadrícula */
+          <>
+            {filteredSites.length === 0 ? (
+              <div className="text-center py-16">
+                <p className="text-lg text-muted-foreground">
+                  {filter === 'visited' && visitedCount === 0
+                    ? 'Start exploring Sevilla and mark your first site! ✨'
+                    : filter === 'visited' && visitedCount === totalCount
+                    ? '🎉 Congratulations! You\'ve visited all the sites!'
+                    : 'No sites match your filter.'}
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredSites.map((site) => (
+                  <SiteCard
+                    key={site.id}
+                    site={site}
+                    isVisited={visited.includes(site.id)}
+                    onToggleVisit={toggleVisit}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
       

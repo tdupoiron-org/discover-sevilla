@@ -42,24 +42,24 @@ This app combines content showcase with interactive state management for visit t
 
 ## Design Direction
 
-The design should feel warm, inviting, and distinctly Spanish - evoking Sevilla's Moorish architecture, golden light, and vibrant tiles through the color palette and spacing. The interface should be elegant and clean, letting the beautiful site imagery and information breathe, while feeling sophisticated enough for a professional visiting for a summit.
+The design should feel professional, trustworthy, and clean - reflecting AXA's corporate brand guidelines with a blue and white color scheme. The interface should maintain elegance and minimalism, letting the site imagery and information breathe, while conveying reliability and professionalism appropriate for a corporate event. The design balances AXA's brand identity with the context of discovering Sevilla, providing a sophisticated experience for summit attendees.
 
 ## Color Selection
 
-Complementary palette with warm terracotta and cool Mediterranean blue, capturing Sevilla's iconic azulejo tiles and sun-drenched architecture.
+**AXA Brand Colors**: Professional blue and white palette that conveys trustworthiness, reliability, and a clean, minimalist aesthetic suitable for a corporate event.
 
-- **Primary Color**: Rich Terracotta `oklch(0.62 0.15 35)` - Communicates warmth, Spanish heritage, and creates strong brand association with Sevilla's architecture
+- **Primary Color**: AXA Professional Blue `oklch(0.45 0.15 250)` - Conveys professionalism, trust, and corporate identity alignment with AXA brand guidelines
 - **Secondary Colors**: 
-  - Warm Cream `oklch(0.96 0.02 85)` for backgrounds - soft, welcoming foundation
-  - Deep Blue `oklch(0.45 0.12 240)` for accents - represents the Guadalquivir river and blue azulejo tiles
-- **Accent Color**: Vibrant Amber `oklch(0.75 0.18 60)` for CTAs and interactive elements - catches attention like Spanish golden hour
+  - Clean White with subtle blue tint `oklch(0.98 0.005 240)` for backgrounds - professional, clean foundation
+  - Light Blue-Gray `oklch(0.92 0.02 240)` for secondary elements - maintains visual hierarchy
+- **Accent Color**: Bright Blue `oklch(0.55 0.18 240)` for CTAs and interactive elements - maintains brand consistency while providing visual interest
 - **Foreground/Background Pairings**:
-  - Background (Warm Cream #F7F5F0): Dark Gray `oklch(0.25 0.01 35)` - Ratio 12.8:1 ✓
-  - Card (White): Dark Gray `oklch(0.25 0.01 35)` - Ratio 14.2:1 ✓
-  - Primary (Terracotta): White `oklch(0.99 0 0)` - Ratio 4.8:1 ✓
-  - Secondary (Light Terracotta): Dark Gray `oklch(0.25 0.01 35)` - Ratio 8.2:1 ✓
-  - Accent (Amber): Black `oklch(0.15 0 0)` - Ratio 10.5:1 ✓
-  - Muted (Light Warm): Medium Gray `oklch(0.50 0.01 35)` - Ratio 4.6:1 ✓
+  - Background (Clean White): Deep Blue-Gray `oklch(0.25 0.02 240)` - High contrast for readability ✓
+  - Card (Pure White): Deep Blue-Gray `oklch(0.25 0.02 240)` - Excellent contrast ✓
+  - Primary (AXA Blue): White `oklch(1 0 0)` - Strong contrast for interactive elements ✓
+  - Secondary (Light Blue-Gray): Deep Blue-Gray `oklch(0.25 0.02 240)` - Accessible contrast ✓
+  - Accent (Bright Blue): White `oklch(1 0 0)` - Clear, accessible contrast ✓
+  - Muted (Very Light Blue-Gray): Medium Gray `oklch(0.50 0.02 240)` - Adequate contrast ✓
 
 ## Font Selection
 

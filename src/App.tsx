@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import { sevillaSites } from '@/data/sites'
 import { SiteCard } from '@/components/SiteCard'
+import { WelcomeDialog } from '@/components/WelcomeDialog'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { MapPin, CheckCircle } from '@phosphor-icons/react'
+import { useLocalStorage } from '@/hooks/use-local-storage'
 
 function App() {
-  const [visitedSites, setVisitedSites] = useState<string[]>([])
+  // Persistance des sites visités et du statut de première visite
+  // Persistence of visited sites and first-time user status
+  const [visitedSites, setVisitedSites] = useLocalStorage<string[]>('sevilla-visited-sites', [])
+  const [hasCompletedWelcome, setHasCompletedWelcome] = useLocalStorage<boolean>('sevilla-welcome-completed', false)
   const [filter, setFilter] = useState<'all' | 'visited' | 'unvisited'>('all')
 
   const visited = visitedSites
@@ -30,8 +35,20 @@ function App() {
   const totalCount = sevillaSites.length
   const progressPercentage = (visitedCount / totalCount) * 100
 
+  // Gestion de la complétion du dialogue de bienvenue
+  // Handle welcome dialog completion
+  const handleWelcomeComplete = () => {
+    setHasCompletedWelcome(true)
+  }
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Dialogue de bienvenue pour les nouveaux utilisateurs */}
+      {/* Welcome dialog for new users */}
+      <WelcomeDialog 
+        open={!hasCompletedWelcome} 
+        onComplete={handleWelcomeComplete}
+      />
       <div className="max-w-7xl mx-auto px-6 py-8 md:px-8 md:py-12">
         <header className="mb-8 md:mb-12">
           <div className="flex items-center gap-3 mb-3">

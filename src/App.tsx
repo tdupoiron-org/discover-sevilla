@@ -131,6 +131,15 @@ function App() {
             >
               tdupoiron
             </a>
+            {' '}and{' '}
+            <a 
+              href="https://github.com/zjaveed" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-foreground transition-colors"
+            >
+              zjaveed
+            </a>
           </p>
         </div>
       </footer>

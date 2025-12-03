@@ -4,10 +4,12 @@ import { SiteCard } from '@/components/SiteCard'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { MapPin, CheckCircle } from '@phosphor-icons/react'
+import ListView from '@/components/ListView'
 
 function App() {
   const [visitedSites, setVisitedSites] = useState<string[]>([])
   const [filter, setFilter] = useState<'all' | 'visited' | 'unvisited'>('all')
+  const [view, setView] = useState<'grid' | 'list'>('grid')
 
   const visited = visitedSites
 
@@ -80,6 +82,35 @@ function App() {
               </button>
             </div>
 
+            {/* Sliding Switcher for Grid/List View */}
+            <div className="flex items-center gap-2 mt-4">
+              <span className="text-sm text-muted-foreground">View:</span>
+              <div className="flex bg-secondary rounded-md overflow-hidden">
+                <button
+                  className={`px-4 py-2 text-sm font-medium transition-colors focus:outline-none ${
+                    view === 'grid'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-secondary-foreground hover:bg-secondary/80'
+                  }`}
+                  onClick={() => setView('grid')}
+                  aria-pressed={view === 'grid'}
+                >
+                  Grid
+                </button>
+                <button
+                  className={`px-4 py-2 text-sm font-medium transition-colors focus:outline-none ${
+                    view === 'list'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-secondary-foreground hover:bg-secondary/80'
+                  }`}
+                  onClick={() => setView('list')}
+                  aria-pressed={view === 'list'}
+                >
+                  List
+                </button>
+              </div>
+            </div>
+
             {visitedCount > 0 && (
               <div className="bg-card border border-border rounded-xl p-4 max-w-md">
                 <div className="flex items-center justify-between mb-2">
@@ -105,19 +136,22 @@ function App() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredSites.map((site) => (
-              <SiteCard
-                key={site.id}
-                site={site}
-                isVisited={visited.includes(site.id)}
-                onToggleVisit={toggleVisit}
-              />
-            ))}
-          </div>
+          view === 'grid' ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredSites.map((site) => (
+                <SiteCard
+                  key={site.id}
+                  site={site}
+                  isVisited={visited.includes(site.id)}
+                  onToggleVisit={toggleVisit}
+                />
+              ))}
+            </div>
+          ) : (
+            <ListView sites={filteredSites} />
+          )
         )}
       </div>
-      
       {/* Footer - Fußzeile */}
       <footer className="border-t border-border mt-12">
         <div className="max-w-7xl mx-auto px-6 py-6 md:px-8">

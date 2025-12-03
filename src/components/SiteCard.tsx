@@ -114,24 +114,12 @@ export function SiteCard({ site, isVisited, onToggleVisit }: SiteCardProps) {
               {site.category}
             </p>
           </div>
-          <div 
-            className="flex-shrink-0 mt-1 cursor-pointer hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded"
-            role="checkbox"
-            aria-checked={isVisited}
-            aria-label={isVisited ? `Mark ${site.name} as not visited` : `Mark ${site.name} as visited`}
-            tabIndex={0}
-            onClick={() => onToggleVisit(site.id)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                onToggleVisit(site.id)
-              }
-            }}
-          >
+          <div className="flex-shrink-0 mt-1">
             <Checkbox 
               checked={isVisited}
-              className="w-6 h-6 pointer-events-none"
-              aria-hidden="true"
+              onCheckedChange={() => onToggleVisit(site.id)}
+              className="w-6 h-6 hover:scale-110 transition-transform"
+              aria-label={isVisited ? `Mark ${site.name} as not visited` : `Mark ${site.name} as visited`}
             />
           </div>
         </div>

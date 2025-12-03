@@ -19,18 +19,18 @@ export function SiteCard({ site, isVisited, onToggleVisit }: SiteCardProps) {
       case 'medium':
         return 'secondary'
       case 'low':
-        return 'outline'
+        return 'accent'
     }
   }
 
   const getPopularityConfig = (popularity: Site['popularity']) => {
     switch (popularity) {
       case 'must-see':
-        return { icon: Sparkle, label: 'Must-See', color: 'text-accent' }
+        return { icon: Sparkle, label: 'Must-See', variant: 'cologne' as const }
       case 'popular':
-        return { icon: Fire, label: 'Popular', color: 'text-orange-500' }
+        return { icon: Fire, label: 'Popular', variant: 'destructive' as const }
       case 'hidden-gem':
-        return { icon: Star, label: 'Hidden Gem', color: 'text-primary' }
+        return { icon: Star, label: 'Hidden Gem', variant: 'default' as const }
     }
   }
 
@@ -68,7 +68,7 @@ export function SiteCard({ site, isVisited, onToggleVisit }: SiteCardProps) {
         </div>
 
         <div className="absolute top-3 right-3">
-          <Badge className={cn("backdrop-blur-sm", popularityConfig.color)}>
+          <Badge variant={popularityConfig.variant} className="backdrop-blur-sm">
             <PopularityIcon weight="fill" className="w-3 h-3 mr-1" />
             {popularityConfig.label}
           </Badge>

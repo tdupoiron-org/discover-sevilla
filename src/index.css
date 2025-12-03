@@ -15,37 +15,28 @@
   }
 }
 
-:root {
-  --background: oklch(0.96 0.02 85);
-  --foreground: oklch(0.25 0.01 35);
-
-  --card: oklch(0.99 0 0);
-  --card-foreground: oklch(0.25 0.01 35);
-
-  --popover: oklch(0.99 0 0);
-  --popover-foreground: oklch(0.25 0.01 35);
-
-  --primary: oklch(0.62 0.15 35);
-  --primary-foreground: oklch(0.99 0 0);
-
-  --secondary: oklch(0.90 0.05 35);
-  --secondary-foreground: oklch(0.25 0.01 35);
-
-  --muted: oklch(0.92 0.02 85);
-  --muted-foreground: oklch(0.50 0.01 35);
-
-  --accent: oklch(0.75 0.18 60);
-  --accent-foreground: oklch(0.15 0 0);
-
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.99 0 0);
-
-  --border: oklch(0.88 0.02 85);
-  --input: oklch(0.88 0.02 85);
-  --ring: oklch(0.62 0.15 35);
-
-  --radius: 0.75rem;
+@layer utilities {
+  /* Cologne-specific utility classes */
+  .cologne-gradient {
+    background: linear-gradient(135deg, 
+      oklch(0.50 0.15 235) 0%, 
+      oklch(0.55 0.22 15) 100%);
+  }
+  
+  .cologne-accent {
+    color: oklch(0.55 0.22 15);
+  }
+  
+  .rhine-blue {
+    color: oklch(0.50 0.15 235);
+  }
+  
+  .cathedral-gray {
+    color: oklch(0.45 0.05 240);
+  }
 }
+
+/* Color variables are now defined in main.css for Cologne theme consistency */
 
 @theme {
   --color-background: var(--background);

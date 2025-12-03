@@ -1,1 +1,41 @@
-{}
+{
+  "name": "Cologne Theme",
+  "description": "Color scheme inspired by Cologne's heraldic colors and visual identity",
+  "colors": {
+    "cologne": {
+      "red": {
+        "primary": "oklch(0.55 0.22 15)",
+        "secondary": "oklch(0.65 0.25 15)",
+        "muted": "oklch(0.70 0.20 20)"
+      },
+      "blue": {
+        "rhine": "oklch(0.50 0.15 235)",
+        "cathedral": "oklch(0.45 0.05 240)",
+        "accent": "oklch(0.60 0.12 235)"
+      },
+      "neutral": {
+        "cathedral_gray": "oklch(0.45 0.05 240)",
+        "stone": "oklch(0.88 0.01 240)",
+        "white": "oklch(0.99 0 0)"
+      },
+      "gold": {
+        "crown": "oklch(0.70 0.18 85)",
+        "accent": "oklch(0.75 0.20 80)"
+      }
+    }
+  },
+  "semanticColors": {
+    "primary": "var(--cologne-blue-rhine)",
+    "secondary": "var(--cologne-neutral-cathedral-gray)",
+    "accent": "var(--cologne-red-primary)",
+    "background": "oklch(0.98 0.005 240)",
+    "foreground": "oklch(0.20 0.02 240)"
+  },
+  "brandCompliance": {
+    "axa": {
+      "maintained": true,
+      "primaryBlue": "var(--cologne-blue-rhine)",
+      "accentColors": ["var(--cologne-red-primary)", "var(--cologne-gold-crown)"]
+    }
+  }
+}

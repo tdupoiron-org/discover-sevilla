@@ -203,7 +203,7 @@
     --color-neutral-a12: var(--slate-a12);
     --color-neutral-contrast: var(--slate-contrast);
 
-    /* Accent colors */
+    /* Accent colors - Rhine Blue (AXA compliant) */
     --color-accent-1: var(--blue-1);
     --color-accent-2: var(--blue-2);
     --color-accent-3: var(--blue-3);
@@ -218,20 +218,20 @@
     --color-accent-12: var(--blue-12);
     --color-accent-contrast: var(--blue-contrast);
 
-    /* Secondary accent colors */
-    --color-accent-secondary-1: var(--violet-1);
-    --color-accent-secondary-2: var(--violet-2);
-    --color-accent-secondary-3: var(--violet-3);
-    --color-accent-secondary-4: var(--violet-4);
-    --color-accent-secondary-5: var(--violet-5);
-    --color-accent-secondary-6: var(--violet-6);
-    --color-accent-secondary-7: var(--violet-7);
-    --color-accent-secondary-8: var(--violet-8);
-    --color-accent-secondary-9: var(--violet-9);
-    --color-accent-secondary-10: var(--violet-10);
-    --color-accent-secondary-11: var(--violet-11);
-    --color-accent-secondary-12: var(--violet-12);
-    --color-accent-secondary-contrast: var(--violet-contrast);
+    /* Secondary accent colors - Cologne Red */
+    --color-accent-secondary-1: var(--red-1);
+    --color-accent-secondary-2: var(--red-2);
+    --color-accent-secondary-3: var(--red-3);
+    --color-accent-secondary-4: var(--red-4);
+    --color-accent-secondary-5: var(--red-5);
+    --color-accent-secondary-6: var(--red-6);
+    --color-accent-secondary-7: var(--red-7);
+    --color-accent-secondary-8: var(--red-8);
+    --color-accent-secondary-9: var(--red-9);
+    --color-accent-secondary-10: var(--red-10);
+    --color-accent-secondary-11: var(--red-11);
+    --color-accent-secondary-12: var(--red-12);
+    --color-accent-secondary-contrast: var(--red-contrast);
 
     /* Foreground colors */
     --color-fg: var(--color-neutral-12);

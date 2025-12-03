@@ -122,8 +122,36 @@ function App() {
       <footer className="border-t border-border mt-12">
         <div className="max-w-7xl mx-auto px-6 py-6 md:px-8">
           <p className="text-center text-sm text-muted-foreground">
-            © 2025 Discover Köln. Made with ❤️ for travelers.
-            {/* Mit Liebe für Reisende gemacht */}
+            © 2025 Discover Köln. Made with ❤️ by{' '}
+            <a 
+              href="https://github.com/tdupoiron" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-foreground transition-colors"
+              aria-label="Visit tdupoiron's GitHub profile"
+            >
+              tdupoiron
+            </a>
+            {', '}
+            <a 
+              href="https://github.com/zjaveed" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-foreground transition-colors"
+              aria-label="Visit zjaveed's GitHub profile"
+            >
+              zjaveed
+            </a>
+            {' '}and{' '}
+            <a 
+              href="https://github.com/lornajane" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-foreground transition-colors"
+              aria-label="Visit Lorna's GitHub profile"
+            >
+              Lorna
+            </a>
           </p>
         </div>
       </footer>

@@ -117,7 +117,7 @@ export function SiteCard({ site, isVisited, onToggleVisit }: SiteCardProps) {
           <div className="flex-shrink-0 mt-1">
             <Checkbox 
               checked={isVisited}
-              onCheckedChange={() => onToggleVisit(site.id)}
+              onCheckedChange={(checked) => onToggleVisit(site.id)}
               className="w-6 h-6 hover:scale-110 transition-transform"
               aria-label={isVisited ? `Mark ${site.name} as not visited` : `Mark ${site.name} as visited`}
             />

@@ -1,27 +1,29 @@
+```chatagent
 ---
 description: 'Custom agent for Axa Summit project - adds bilingual comments and maintains Notion documentation.'
 tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'makenotion/notion-mcp-server/*', 'runSubagent', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'extensions', 'todos']
 ---
-# Instructions / Instrucciones
+# Instructions / Anweisungen
 
-## Code Comments / Comentarios de Código
-Always add comments in both English and Spanish for all code changes.
-Siempre agrega comentarios en inglés y español para todos los cambios de código.
+## Code Comments / Code-Kommentare
+Always add comments in both English and German for all code changes.
+Fügen Sie immer Kommentare in Englisch und Deutsch für alle Codeänderungen hinzu.
 
-## Documentation Updates / Actualizaciones de Documentación
+## Documentation Updates / Dokumentationsaktualisierungen
 After each code change, update the corresponding Notion documentation page automatically.
-Después de cada cambio de código, actualiza automáticamente la página de documentación correspondiente en Notion.
+Aktualisieren Sie nach jeder Codeänderung automatisch die entsprechende Notion-Dokumentationsseite.
 
-**Notion Page**: [Discover Sevilla - Travel Discovery App](https://www.notion.so/2a130ca4e79e8166bce1cb12c4b0cacb)
+**Notion Page**: [Discover Cologne - Travel Discovery App](https://www.notion.so/2a130ca4e79e8166bce1cb12c4b0cacb)
 
-### What to update / Qué actualizar:
+### What to update / Was zu aktualisieren ist:
 - Document new features or components added
 - Update task progress (completed, in-progress, upcoming)
 - Add technical notes or decisions made
 - Update the "Last Updated" timestamp
 
-### When to update / Cuándo actualizar:
+### When to update / Wann zu aktualisieren ist:
 - After implementing new components
 - After completing tasks or features
 - After making architectural decisions
 - After adding or modifying significant code
+```
